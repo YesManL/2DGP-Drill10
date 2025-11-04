@@ -18,14 +18,19 @@ class Bird:
         self.width = int(182 * self.size_x)
         self.height = int(168 * self.size_y)
 
+        self.flap_speed = 0.15
+        self.frame_float = 0.0
+
     def draw(self):
         if self.dir == 1:
-            self.image.clip_draw(self.frame * 182, 0, 182, 168, self.x, self.y, self.width, self.height)
+            self.image.clip_draw(int(self.frame) * 182, 0, 182, 168, self.x, self.y, self.width, self.height)
         else:
-            self.image.clip_composite_draw(self.frame * 182, 0, 182, 168, 0, 'h', self.x, self.y, self.width, self.height)
+            self.image.clip_composite_draw(int(self.frame) * 182, 0, 182, 168, 0, 'h', self.x, self.y, self.width, self.height)
 
     def update(self):
-        self.frame = (self.frame + 1) % 5
+        self.frame_float += self.flap_speed
+        self.frame = int(self.frame_float) % 5
+
         self.x += self.velocity * self.dir
 
         if self.x < 100 or self.x > 1500:
