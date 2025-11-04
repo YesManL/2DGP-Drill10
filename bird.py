@@ -13,11 +13,16 @@ class Bird:
         self.velocity = velocity
         self.dir = 1
 
+        self.size_x = 1.2
+        self.size_y = 1.2
+        self.width = int(182 * self.size_x)
+        self.height = int(168 * self.size_y)
+
     def draw(self):
         if self.dir == 1:
-            self.image.clip_draw(self.frame * 182, 0, 182, 168, self.x, self.y)
+            self.image.clip_draw(self.frame * 182, 0, 182, 168, self.x, self.y, self.width, self.height)
         else:
-            self.image.clip_composite_draw(self.frame * 182, 0, 182, 168, 0, 'h', self.x, self.y, 182, 168)
+            self.image.clip_composite_draw(self.frame * 182, 0, 182, 168, 0, 'h', self.x, self.y, self.width, self.height)
 
     def update(self):
         self.frame = (self.frame + 1) % 5
