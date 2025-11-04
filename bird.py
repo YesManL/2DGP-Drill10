@@ -35,3 +35,5 @@ class Bird:
 
         if self.x < 100 or self.x > 1500:
             self.dir *= -1
+
+# 2023182044 게임공학과 임호권
