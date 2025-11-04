@@ -5,14 +5,23 @@ import game_framework
 class Bird:
     image = None
 
-    def __init__(self, x=400, y=300):
+    def __init__(self, x=400, y=300, velocity=2.0):
         if Bird.image == None:
             Bird.image = load_image('bird_animation.png')
         self.x, self.y = x, y
         self.frame = 0
+        self.velocity = velocity
+        self.dir = 1
 
     def draw(self):
-        self.image.clip_draw(self.frame * 182, 0, 182, 168, self.x, self.y)
+        if self.dir == 1:
+            self.image.clip_draw(self.frame * 182, 0, 182, 168, self.x, self.y)
+        else:
+            self.image.clip_composite_draw(self.frame * 182, 0, 182, 168, 0, 'h', self.x, self.y, 182, 168)
 
     def update(self):
         self.frame = (self.frame + 1) % 5
+        self.x += self.velocity * self.dir
+
+        if self.x < 100 or self.x > 1500:
+            self.dir *= -1
