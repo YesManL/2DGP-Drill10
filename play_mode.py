@@ -6,6 +6,7 @@ from bird import Bird
 import game_world
 
 import game_framework
+import random
 
 
 boy = None
@@ -33,8 +34,11 @@ def init():
     boy = Boy()
     game_world.add_object(boy, 1)
 
-    bird = Bird(500, 300)
-    game_world.add_object(bird, 1)
+    for i in range(10):
+        x = random.randint(100, 1500)
+        y = random.randint(200, 550)
+        bird = Bird(x, y)
+        game_world.add_object(bird, 1)
 
 def update():
     game_world.update()
